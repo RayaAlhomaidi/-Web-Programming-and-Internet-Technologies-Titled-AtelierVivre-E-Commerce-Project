@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header .favorites-icon {
+            font-size: 18px;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .favorite-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .favorite-item img {
+            width: 70px;
+            height: 70px;
+            border-radius: 8px;
+        }
+
+        .favorite-details {
+            flex: 1;
+            margin-left: 15px;
+        }
+
+        .favorite-details h4 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .favorite-details p {
+            margin: 5px 0 0;
+            color: #888;
+        }
+
+        .favorite-actions {
+            text-align: right;
+        }
+
+        .favorite-actions button {
+            padding: 8px 15px;
+            border: none;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .favorite-actions button:hover {
+            background-color: #c0392b;
+        }
+
+        #empty-message {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 18px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Favorites</h1>
+        <div class="favorites-icon">❤  <span id="favorites-count">0</span></div>
+    </header>
+
+    <div class="container">
+        <div id="favorites-list">
+            <!-- Favorite items will be displayed here -->
+        </div>
+        <div id="empty-message" style="display: none;">
+            Your favorites list is empty.
+        </div>
+    </div>
+
+<script>
+    function updateFavorites() {
+        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        const favoritesList = document.getElementById('favorites-list');
+        const favoritesCount = document.getElementById('favorites-count');
+        const emptyMessage = document.getElementById('empty-message');
+
+        favoritesList.innerHTML = '';
+        favoritesCount.textContent = favorites.length;
+
+        if (favorites.length === 0) {
+            emptyMessage.style.display = 'block';
+        } else {
+            emptyMessage.style.display = 'none';
+
+            favorites.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'favorite-item';
+                div.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="favorite-details">
+                        <h4>${item.name}</h4>
+                        <p>${item.price}</p>
+                    </div>
+                    <div class="favorite-actions">
+                        <button onclick="removeFromFavorites(${index})">Remove</button>
+                    </div>
+                `;
+                favoritesList.appendChild(div);
+            });
+        }
+    }
+
+    function removeFromFavorites(index) {
+        const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        favorites.splice(index, 1); // Remove item from favorites
+        localStorage.setItem('favorites', JSON.stringify(favorites)); // Update localStorage
+        updateFavorites();
+    }
+
+    window.onload = updateFavorites;
+</script>
+</body>
+</html>

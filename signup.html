@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-image: url("images/imlo.jpg"); /* Background image */
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Brand name as background text */
+    body::before {
+      content: "AtelierVivre"; /* Replace with your brand name */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -70%);
+      font-size: 199px; /* Size of the brand name */
+      font-weight: bold;
+      color: rgba(0, 0, 0, 0.6); /* Faint text color */
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 0;
+    
+    }
+
+    .signup-container {
+      position: relative;
+      z-index: 1; /* Ensure it appears above the background text */
+      padding: 40px 30px;
+      background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+      border-radius: 10px; /* Smaller border-radius */
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 380px; /* Fixed max-width */
+      text-align: center;
+      box-sizing: border-box; /* Ensures padding doesn't affect the width */
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0px;
+      font-size: 14px;
+      color: #555;
+      text-align: left;
+    }
+
+    input {
+      width: 101%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 100px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #444;
+    }
+
+    /* Style for the eye toggle */
+    .password-wrapper {
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .password-wrapper input {
+      width: calc(113% - 40px);
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 11px;
+      top: 40%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 18px;
+      color: #555;
+    }
+
+    .switch {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .switch a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    .switch a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <h2>Sign Up</h2>
+    <form id="signup-form">
+      <!-- Email -->
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <!-- Username -->
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" placeholder="Choose a username" required>
+
+      <!-- Password -->
+      <label for="password">Password:</label>
+      <div class="password-wrapper">
+        <input type="password" id="password" name="password" placeholder="Create a password" required>
+        <span class="toggle-password" onclick="togglePassword()">👁️</span>
+      </div>
+
+      <!-- Confirm Password -->
+      <label for="confirm-password">Confirm Password:</label>
+      <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+
+      <!-- Phone Number -->
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+
+      <!-- Date of Birth -->
+      <label for="birthday">Date of Birth:</label>
+      <input type="date" id="birthday" name="birthday">
+
+      <!-- Submit Button -->
+      <button type="button" onclick="signup()">Sign Up</button>
+    </form>
+
+    <div class="switch">
+      If you have an account, <a href="login.html">Login</a>
+    </div>
+  </div>
+
+  <script>
+    // Toggle Password Visibility
+    function togglePassword() {
+      const password = document.getElementById('password');
+      if (password.type === 'password') {
+        password.type = 'text';
+      } else {
+        password.type = 'password';
+      }
+    }
+
+    // Sign Up Function
+    function signup() {
+      const email = document.getElementById('email').value;
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+      const phone = document.getElementById('phone').value;
+      const birthday = document.getElementById('birthday').value;
+
+      if (!email.includes("@")) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      if (username && email && password) {
+        // Save user information to localStorage
+        localStorage.setItem('email', email);
+        localStorage.setItem('username', username);
+        localStorage.setItem('phone', phone);
+        localStorage.setItem('birthday', birthday);
+
+        // Redirect to the login page
+        alert("Sign Up successful! Redirecting to login...");
+        window.location.href = 'index.html';
+      } else {
+        alert('Please fill out all required fields.');
+      }
+    }
+  </script>
+</body>
+</html>

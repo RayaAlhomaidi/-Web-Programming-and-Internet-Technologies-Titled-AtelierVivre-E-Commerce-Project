@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - AtelierVivre</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ecf0f1;
+            color: #34495e;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .brand-logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+        nav {
+            flex: 1;
+            text-align: center;
+        }
+        nav a {
+            text-decoration: none;
+            margin: 0 15px;
+            color: white;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #1abc9c;
+        }
+
+        .icons {
+            display: flex;
+            align-items: center;
+        }
+        
+
+       /* تنسيق زر السلة */
+.icon {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #728292;  /* لون النص */
+    font-size: 24px;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 25px;
+    background-color: rgba(52, 152, 219, 0.1);  /* لون خلفية خفيف */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.icon:hover {
+    color: #2980b9;  /* تغيير اللون عند التمرير */
+    transform: scale(1.1);  /* تكبير الزر قليلاً عند التمرير */
+}
+
+.icon span {
+    margin-left: 8px;
+    font-size: 18px;
+}
+
+/* تأثير التفاعل عند التمرير فوق الأيقونة */
+.icon:hover span {
+    font-weight: bold;
+}
+
+        /* تنسيق زر إضافة إلى المفضلة */
+.add-to-favorites-button {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #e74c3c;
+    font-size: 24px;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 25px;
+    background-color: rgba(255, 99, 71, 0.1);  /* لون خلفية خفيف */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.add-to-favorites-button:hover {
+    color: #c0392b;  /* تغيير اللون عند التمرير */
+    transform: scale(1.1);  /* تكبير الزر قليلاً عند التمرير */
+}
+
+.add-to-favorites-button span {
+    margin-left: 8px;
+    font-size: 18px;
+}
+
+/* تأثير التفاعل عند التمرير فوق القلب */
+.add-to-favorites-button:hover span {
+    font-weight: bold;
+}
+
+        
+
+        .product-container {
+            display: flex;
+            justify-content: center;
+            margin: 40px;
+            flex-wrap: wrap;
+        }
+        .product-image {
+            flex: 1;
+            max-width: 500px;
+            margin-right: 40px;
+            position: relative;
+        }
+        .product-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .product-thumbnails {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .product-thumbnails img {
+            width: 80px;
+            height: auto;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        .product-thumbnails img:hover {
+            transform: scale(1.1);
+        }
+        .product-details {
+            flex: 2;
+            max-width: 500px;
+        }
+        .product-details h1 {
+            font-size: 28px;
+            color: #2c3e50;
+        }
+        .product-price {
+            font-size: 24px;
+            color: #ea2c17;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .product-description {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin: 20px 0;
+        }
+        .size-options, .color-options, .quantity {
+            margin: 40px 0;
+        }
+        .size-options label, .color-options label {
+            margin-right: 20px;
+            background-color: #7f8e91;
+            padding: 5px 10px;
+            border-radius: 55px;
+            transition: background-color 0.3s;
+        }
+        .size-options label:hover, .color-options label:hover {
+            background-color: #393d4d;
+            color: white;
+        }
+        .add-to-cart-button {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .add-to-cart-button:hover {
+            background-color: #1abc9c;
+        }
+        .social-sharing {
+            margin-top: 20px;
+        }
+        .social-sharing a {
+            text-decoration: none;
+            color: #34495e;
+            margin-right: 20px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+        .social-sharing a:hover {
+            color: #1abc9c;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .reviews {
+            margin-top: 40px;
+        }
+        .review {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .review h4 {
+            margin: 0;
+            font-size: 18px;
+            color: #2c3e50;
+        }
+        .review p {
+            margin: 5px 0;
+            color: #7f8c8d;
+        }
+        .stars {
+            color: #f39c12; /* Star color */
+            margin: 5px 0;
+        }
+        .stars i {
+            margin-right: 2px; /* Space between stars */
+        }
+        .add-to-fav-button {
+        background-color: #333;
+        color: white;
+        padding: 10px 15px;
+        text-decoration: none;
+        border-radius: 5px;
+        display: inline-block;
+        margin-top: 20px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .add-to-fav-button:hover {
+        background-color: #c41717; /* لون أحمر عند التمرير */
+        color: white; /* اللون النصي يبقى أبيض */
+    } 
+    
+        
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="brand-logo">
+            <a href="index.html" style="text-decoration: none; color: inherit;">AtelierVivre</a>
+        </div>        
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="icons">
+            <a href="cart.html" class="icon">🛒 <span id="cart-count">0</span></a>
+            <a href="fav.html" class="add-to-favorites-button">❤ <span id="favorites-count">0</span></a>
+        </div>
+    </header>
+
+    <!-- Product Details Section -->
+    <div class="product-container">
+        <div class="product-image">
+            <img id="main-image" src="images/img40.jpg" alt="Chic Blouse">
+            <div class="product-thumbnails">
+                <img src="images/img01.jpg" alt="Thumbnail 1" onclick="changeImage('images/img01.jpg')">
+                <img src="images/img0111.jpg" alt="Thumbnail 2" onclick="changeImage('images/img0111.jpg')">
+                <img src="images/img011.jpg" alt="Thumbnail 3" onclick="changeImage('images/img011.jpg')">
+                <img src="images/img0112.jpg" alt="Thumbnail 4" onclick="changeImage('images/img0112.jpg')">
+                <img src="images/img01111111.jpg" alt="Thumbnail 5" onclick="changeImage('images/img01111111.jpg')">
+                <img src="images/img0.jpg" alt="Thumbnail 6" onclick="changeImage('images/img0.jpg')">
+                <img src="images/img011111.jpg" alt="Thumbnail 7" onclick="changeImage('images/img011111.jpg')">
+                <img src="images/img0111111.jpg" alt="Thumbnail 8" onclick="changeImage('images/img0111111.jpg')">
+            </div>
+        </div>
+
+        <div class="product-details">
+            <h1 id="product-name">Chic Blouse</h1>
+            <div class="product-price" id="product-price">$99.99</div>
+            <div class="product-description" id="product-description">Modern and stylish design.</div>
+
+            <!-- Size, Color, Quantity -->
+            <div class="size-options">
+                <strong>Size:</strong>
+                <label><input type="radio" name="size" value="S"> S</label>
+                <label><input type="radio" name="size" value="M"> M</label>
+                <label><input type="radio" name="size" value="L"> L</label>
+            </div>
+
+            <div class="color-options">
+                <strong>Color:</strong>
+                <label><input type="radio" name="color" value="brown">Brown</label>
+                <label><input type="radio" name="color" value="gray"> Gray</label>
+                <label><input type="radio" name="color" value="black"> Black</label>
+            </div>
+
+            <div class="quantity">
+                <strong>Quantity:</strong>
+                <input type="number" value="1" min="1" style="width: 50px;">
+            </div>
+
+            <!-- Add to Cart and fav Button -->
+            <a href="cart.html" class="add-to-cart-button" onclick="addToCart()">Add to Cart 🛒</a>
+
+            <a href="javascript:void(0);" class="add-to-fav-button" onclick="addToFavorites()">Add to Favorites ❤</a>
+            <div class="social-sharing">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://yourwebsite.com/product-page" target="_blank" title="Share on Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/intent/tweet?url=https://yourwebsite.com/product-page&text=Check out this amazing product!" target="_blank" title="Share on Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com/?url=https://yourwebsite.com/product-page" target="_blank" title="Share on Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Reviews Section -->
+    <div class="reviews">
+        <h2>Customer Reviews</h2>
+        <div class="review">
+            <h4>Emily Johnson</h4>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+            </div>
+            <p>Absolutely love this blouse! The fit is perfect and the fabric is so soft.</p>
+        </div>
+        <div class="review">
+            <h4>Michael Smith</h4>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+            <p>Great quality and stylish design. Highly recommend it!</p>
+        </div>
+        <div class="review">
+            <h4>Sara Wilson</h4>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="far fa-star"></i>
+            </div>
+            <p>This is my new favorite top! It goes with everything.</p>
+        </div>
+        <div class="review">
+            <h4>James Brown</h4>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+            </div>
+            <p>Comfortable and chic! I get compliments every time I wear it.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 AtelierVivre. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript for changing the main image and loading product details -->
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail - AtelierVivre</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ecf0f1;
+            color: #34495e;
+            margin: 0;
+            padding: 20px;
+        }
+        .product-container {
+            display: flex;
+            justify-content: space-between;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .product-image {
+            width: 300px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .product-details {
+            flex: 1;
+            margin-left: 20px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #34495e;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #1abc9c;
+        }
+        .product-thumbnails img {
+            width: 50px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="product-container">
+    <img id="main-image" src="images/default.jpg" alt="Product Image" class="product-image">
+    <div class="product-details">
+        <h1 id="product-name">Product Name</h1>
+        <p id="product-price">Product Price</p>
+        <p id="product-description">Product Description</p>
+        <div class="buttons">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" value="1" min="1" style="width: 50px; text-align: center;">
+            <button onclick="addToCart()">Add to Cart</button>
+        </div>
+        <div class="product-thumbnails"></div>
+    </div>
+</div>
+
+<script>
+    function changeImage(src) {
+        const mainImage = document.getElementById('main-image');
+        mainImage.src = src;
+
+        // إضافة معالجة الخطأ
+        mainImage.onerror = function() {
+            mainImage.src = 'images/default.jpg'; // صورة بديلة في حال عدم وجود الصورة
+            console.error('Image not found:', src);
+        };
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('id');
+
+    const products = {
+        '1': {
+            name: 'Elegant Pants',
+            price: '$199.99',
+            description: 'A casual yet trendy outfit featuring a white cotton T-shirt paired Perfect for any special occasion.',
+            image: 'images/img16.jpg',
+            thumbnails: [
+                'images/imgr1.jpg',
+                'images/imgr2.jpg',
+                'images/imgr3.jpg',
+                'images/imgr4.jpg',
+                'images/imgr5.jpg'
+            ]
+        },
+        '2': {
+            name: 'Luxury Suit',
+            price: '$249.99',
+            description: 'Modern and stylish design.',
+            image: 'images/img2.jpg',
+            thumbnails: [
+                'images/imgh1.jpg',
+                'images/imgh2.jpg',
+                'images/imgh3.jpg',
+                'images/imgh4.jpg',
+                'images/img011111.jpg',
+                'images/img011.jpg',
+            ]
+        },
+        '3': {
+            name: 'Chic Blouse',
+            price: '$99.99',
+            description: 'Modern and stylish design.',
+            image: 'images/img40.jpg',
+            thumbnails: [
+                'images/img01.jpg',
+                'images/img0111.jpg',
+                'images/img011.jpg',
+                'images/img0112.jpg',
+                'images/img01111111.jpg',
+                'images/img0.jpg',
+                'images/img011111.jpg',
+                'images/img0111111.jpg',
+            ]
+        } ,
+        '4': {
+
+name: 'Elegant Burgundy Outfit',
+
+price: '$88.79',
+
+description: 'A casual yet trendy outfit featuring a white cotton T-shirt paired',
+
+image: 'images/img4.jpg',
+
+thumbnails: [
+
+'images/1.jpg',
+
+'images/2.jpg',
+
+'images/3.jpg',
+
+'images/4.jpg',
+
+'images/5.jpg',
+
+]
+
+},
+
+'5': {
+
+name: 'Brown Look',
+
+price: '$99.89',
+
+description: 'Modern and stylish design.',
+
+image: 'images/img3.jpg',
+
+thumbnails: [
+
+'images/11.jpg',
+
+'images/22.jpg',
+
+'images/33.jpg',
+
+'images/44.jpg',
+
+'images/55.jpg',
+
+'images/66.jpg',
+
+'images/77.jpg',
+
+]
+
+},
+
+'6': {
+
+name: 'Chic Green Dress',
+
+price: '$100.00',
+
+description: 'Modern and stylish design.',
+
+image: 'images/imgoo.jpg',
+
+thumbnails: [
+
+'images/G.jpg',
+
+'images/G1.jpg',
+
+'images/G2.jpg',
+
+'images/G3.jpg',
+
+'images/G4.jpg',
+
+'images/G5.jpg',
+
+'images/img0111111.jpg',
+
+]
+
+},
+
+'7': {
+
+name: 'Chic Blouseee',
+
+price: '$199.99',
+
+description: 'Modern and stylish design.',
+
+image: 'images/img18.jpg',
+
+thumbnails: [
+
+'images/p0.jpg',
+
+'images/p1.jpg',
+
+'images/p2.jpg',
+
+'images/p3.jpg',
+
+'images/p4.jpg',
+
+'images/p5.jpg',
+
+]
+
+},
+
+'8': {
+
+name: 'Cute Outfit in White and Pink',
+
+price: '$180.99',
+
+description: 'Modern and stylish design.',
+
+image: 'images/img15.jpg',
+
+thumbnails: [
+
+'images/r.jpg',
+
+'images/r1.jpg',
+
+'images/r2.jpg',
+
+'images/r3.jpg',
+
+'images/r4.jpg',
+
+'images/r5.jpg',
+
+'images/r6.jpg',
+
+'images/r7.jpg'
+
+]
+
+}
+ };
+
+    const productDetails = products[productId] || {
+        name: 'Unknown Product',
+        price: '$0.00',
+        description: 'No description available.',
+        image: 'images/default.jpg',
+        thumbnails: []
+    };
+
+    document.title = productDetails.name;
+    document.getElementById('product-name').innerText = productDetails.name;
+    document.getElementById('product-price').innerText = productDetails.price;
+    document.getElementById('product-description').innerText = productDetails.description;
+    document.getElementById('main-image').src = productDetails.image;
+
+    const thumbnailContainer = document.querySelector('.product-thumbnails');
+    thumbnailContainer.innerHTML = ''; // Clear current thumbnails
+
+    if (productDetails.thumbnails && productDetails.thumbnails.length > 0) {
+        productDetails.thumbnails.forEach((thumb) => {
+            const img = document.createElement('img');
+            img.src = thumb;
+            img.alt = 'Thumbnail';
+            img.onclick = () => changeImage(thumb);
+            thumbnailContainer.appendChild(img);
+        });
+    } else {
+        console.error('No thumbnails available for this product.');
+    }
+
+    function addToCart() {
+        const quantity = parseInt(document.getElementById('quantity').value);
+        const cartItem = {
+            id: productId,
+            name: productDetails.name,
+            price: productDetails.price,
+            image: productDetails.image,
+            quantity: quantity
+        };
+
+        // استرداد السلة الحالية من LocalStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // التحقق من وجود المنتج في السلة مسبقًا
+        const existingProductIndex = cart.findIndex(item => item.id === cartItem.id);
+        if (existingProductIndex !== -1) {
+            // تحديث الكمية إذا كان المنتج موجودًا بالفعل
+            cart[existingProductIndex].quantity += quantity;
+        } else {
+            // إضافة المنتج للسلة
+            cart.push(cartItem);
+        }
+
+        // تخزين السلة في LocalStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        // تحديث عداد السلة في الهيدر
+        updateCartCount();
+
+        alert('تمت إضافة المنتج إلى السلة بنجاح!');
+    }
+
+    // تحديث عدد العناصر في السلة
+    const updateCartCount = () => {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartCountElement = document.getElementById("cart-count");
+        cartCountElement.textContent = cart.length;
+    };
+    // Initialize cart count on page load
+    updateCartCount();
+    function addToFavorites() {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const productId = '1'; // استبدل بـ productId المناسب
+    const productDetails = {
+        id: productId,
+        name: document.getElementById('product-name').innerText,
+        price: document.getElementById('product-price').innerText,
+        image: document.getElementById('main-image').src
+    };
+
+    // تحقق إذا كان المنتج موجودًا بالفعل في المفضلة
+    if (!favorites.some(item => item.id === productId)) {
+        favorites.push(productDetails);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        alert('تم إضافة المنتج إلى المفضلة!');
+    } else {
+        alert('المنتج موجود بالفعل في المفضلة.');
+    }
+}
+</script>
+
+</body>
+</html>

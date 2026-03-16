@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AtelierVivre</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <a href="#">AtelierVivre</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <a href="login.html" id="login-link">Log In</a>
+       
+    </header>
+
+    <!-- Main Section (Image Banner) -->
+    <section id="main-banner">
+        <div class="hero-content">
+            <h1>Discover the Elegance of AtelierVivre</h1>
+            <p>Where luxury meets style</p>
+            <a href="shop.html" class="btn">Shop Now</a>
+        </div>
+        <img src="images/img10.jpg" alt="Main Banner Image" id="banner-image">
+    </section>
+
+    <!-- Login Section -->
+    <section id="login-section" style="display: none;">
+        <form id="login-form">
+            <h2>Log In</h2>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Log In</button>
+            <p id="error-message" style="display: none; color: red;">Invalid username or password!</p>
+            <button type="button" onclick="closeLoginForm()">Close</button>
+        </form>
+    </section>
+
+    <!-- Welcome Section -->
+    <section id="welcome">
+        <div id="welcome-container" style="display: none;">
+            <h2 id="welcome-message"></h2>
+            <button id="logout-button">Log Out</button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="about-container">
+            <h2>Welcome to AtelierVivre</h2>
+            <p>
+                AtelierVivre is your destination for high-end fashion and styling. Our platform brings you exclusive outfit collections, tailored to elevate your elegance and sophistication. Discover luxury, embrace style.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 <span id="footer-brand-name">AtelierVivre</span>. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Display the welcome message if the user is logged in
+        window.onload = function () {
+            const username = localStorage.getItem('username');
+            const welcomeMessage = document.getElementById('welcome-message');
+            const welcomeContainer = document.getElementById('welcome-container');
+            const logoutButton = document.getElementById('logout-button');
+
+            if (username) {
+                // Show the welcome message and logout button
+                welcomeMessage.innerText ='Welcome back, ' + username + '!';
+                welcomeContainer.style.display = 'block'; // Show the welcome message
+            } else {
+                // Hide the welcome section if not logged in
+                welcomeContainer.style.display = 'none';
+            }
+
+            // Logout function
+            logoutButton.addEventListener('click', function () {
+                localStorage.removeItem('username'); // Remove username from localStorage
+                window.location.href = 'logout.html'; // Redirect to login page
+            });
+
+            // Update cart count from localStorage
+            updateCartCount();
+        };
+
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+    </script>
+</body>
+</html>

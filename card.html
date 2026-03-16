@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - AtelierVivre</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <a href="#">AtelierVivre</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <a href="login.html" id="login-link">Log In</a>
+        <nav>
+            <ul>
+                <li><a href="cart.html" id="cart-icon">🛒 (<span id="cart-count">0</span>)</a></li>
+                <li><a href="#" id="favorites-icon">❤ (0)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Cart Section -->
+    <div class="cart-container">
+        <h1>Your Shopping Cart</h1>
+        <div id="cart-items"></div>
+        <div id="empty-cart" class="empty-cart" style="display: none;">Your cart is empty.</div>
+        <a href="checkout.html" class="btn" style="display: none;" id="checkout-button">Proceed to Checkout</a>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 <span id="footer-brand-name">AtelierVivre</span>. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Display cart items
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItemsContainer = document.getElementById('cart-items');
+        const emptyCartMessage = document.getElementById('empty-cart');
+        const checkoutButton = document.getElementById('checkout-button');
+
+        if (cart.length === 0) {
+            emptyCartMessage.style.display = 'block';
+        } else {
+            cart.forEach(item => {
+                const cartItemDiv = document.createElement('div');
+                cartItemDiv.className = 'cart-item';
+                cartItemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" style="width: 50px; margin-right: 10px;">
+                    <div class="cart-item-details">
+                        <div>${item.name}</div>
+                        <div class="cart-item-price">${item.price}</div>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(cartItemDiv);
+            });
+            checkoutButton.style.display = 'inline-block';
+        }
+    </script>
+</body>
+</html>

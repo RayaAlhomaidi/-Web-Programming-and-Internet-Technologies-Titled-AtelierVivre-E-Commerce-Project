@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-image: url("images/imlo.jpg"); /* Background image */
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Brand name as background text */
+    body::before {
+      content: "AtelierVivre"; /* Replace with your brand name */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -70%);
+      font-size: 199px; /* Size of the brand name */
+      font-weight: bold;
+      color: rgba(0, 0, 0, 0.6); /* Faint text color */
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .login-container {
+      position: relative;
+      z-index: 1; /* Ensure it appears above the background text */
+      padding: 40px 30px;
+      background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+      border-radius: 10px; /* Smaller border-radius */
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 380px; /* Fixed max-width */
+      text-align: center;
+      box-sizing: border-box; /* Ensures padding doesn't affect the width */
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #555;
+      text-align: left;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 100px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #444;
+    }
+
+    /* Style for the eye toggle */
+    .password-wrapper {
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    .password-wrapper input {
+      width: calc(113% - 40px);
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 8px;
+      top: 39%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 18px;
+      color: #555;
+    }
+
+    .switch {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .switch a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    .switch a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form id="login-form">
+      <!-- Username -->
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+      <!-- Password -->
+      <label for="password">Password:</label>
+      <div class="password-wrapper">
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <span class="toggle-password" onclick="togglePassword()">👁️</span>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="button" onclick="login()">Login</button>
+    </form>
+
+    <div class="switch">
+      Don't have an account? <a href="signup.html">Sign up</a>
+    </div>
+  </div>
+
+  <script>
+    // Toggle Password Visibility
+    function togglePassword() {
+      const password = document.getElementById('password');
+      if (password.type === 'password') {
+        password.type = 'text';
+      } else {
+        password.type = 'password';
+      }
+    }
+
+    // Login Function
+    function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username && password) {
+        // Verify login (Example: placeholder functionality)
+        if (username === "testuser" && password === "password123") {
+          alert("Login successful!");
+          window.location.href = 'index.html';
+        } else {
+          alert("Invalid username or password. Please try again.");
+        }
+      } else {
+        alert('Please fill out all fields.');
+      }
+    }
+  </script>
+</body>
+</html>

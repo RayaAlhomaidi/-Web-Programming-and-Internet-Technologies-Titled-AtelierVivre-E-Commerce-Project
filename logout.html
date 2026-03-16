@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-image: url("images/imlo.jpg"); /* Background image */
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Brand name as background text */
+    body::before {
+      content: "AtelierVivre"; /* Replace with your brand name */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -70%);
+      font-size: 199px; /* Size of the brand name */
+      font-weight: bold;
+      color: rgba(0, 0, 0, 0.6); /* Faint text color */
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .logout-container {
+      position: relative;
+      z-index: 1; /* Ensure it appears above the background text */
+      padding: 40px 30px;
+      background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+      border-radius: 10px; /* Smaller border-radius */
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 380px; /* Fixed max-width */
+      text-align: center;
+      box-sizing: border-box; /* Ensures padding doesn't affect the width */
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #333;
+    }
+
+    p {
+      margin-bottom: 30px;
+      font-size: 18px;
+      color: #555;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #444;
+    }
+  </style>
+</head>
+<body>
+  <div class="logout-container">
+    <h2>We Hope to See You Again!</h2>
+    <p>You have logged out successfully. Have a great day!</p>
+
+    <!-- Logout Button -->
+    <button onclick="goHome()">Go to Homepage</button>
+  </div>
+
+  <script>
+    // Redirect to the homepage or another page after logout
+    function goHome() {
+      window.location.href = 'index.html'; // Redirect to the homepage
+    }
+  </script>
+</body>
+</html>
